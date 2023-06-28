@@ -24,6 +24,16 @@ To install the package:
 
     npm install
 
+The `requests` Python package is required. You can install it either with `pip`:
+
+    pip install requests
+
+Or from Debian packages:
+
+    sudo apt install python3-requests
+
+This script requires Python >= 3.7
+
 ## Configuration
 
 Copy the file `conf-template.json` to `conf.json`, and edit it. Required fields are:
