@@ -72,6 +72,7 @@ CONF_SCHEMA = {
   ]
 }
 
+
 def json_validate_str(name: str, data: Any) -> Optional[str]:
     """
     Validate a non-empty string
@@ -82,6 +83,7 @@ def json_validate_str(name: str, data: Any) -> Optional[str]:
     if not data:
         return f"{name}: string should not be empty"
     return None
+
 
 def json_validate_dict(name: str, data: Any, schema: Dict[str, Any]) -> Optional[str]:
     if not isinstance(data, dict):
@@ -109,6 +111,7 @@ def json_validate_dict(name: str, data: Any, schema: Dict[str, Any]) -> Optional
 
     return None
 
+
 def read_configuration(conf_file: Path) -> None:
     """
     Read configuration from JSON file
@@ -123,7 +126,7 @@ def read_configuration(conf_file: Path) -> None:
     conf = data
 
 
-def jeedom_variable(name: str, value:Any=None, conv:Optional[Callable]=None, default:Any=None) -> Optional[Any]:
+def jeedom_variable(name: str, value: Any = None, conv: Optional[Callable] = None, default: Any = None) -> Optional[Any]:
     """
     Read (value is None) or write (value not None) a variable on Jeedom
 
@@ -159,7 +162,7 @@ def jeedom_variable(name: str, value:Any=None, conv:Optional[Callable]=None, def
     return read_value
 
 
-def get_daikin_data() -> Dict[str,Any]:
+def get_daikin_data() -> Dict[str, Any]:
     """
     Get data from Daikin. Each device is stored to a JSON file per ID
     """
@@ -170,7 +173,7 @@ def get_daikin_data() -> Dict[str,Any]:
     data = {}
     logging.debug(f"Daikin - Executing script {DAIKIN_SCRIPT}")
     p = subprocess.run(['node', str(DAIKIN_SCRIPT.resolve()), conf["daikin"]["username"], conf["daikin"]["password"]],
-        capture_output=True, encoding="utf-8", cwd=output_dir)
+                       capture_output=True, encoding="utf-8", cwd=output_dir)
 
     re_output_file = re.compile("Output file: (.*)")
     for line in p.stdout.splitlines():
@@ -181,6 +184,7 @@ def get_daikin_data() -> Dict[str,Any]:
                 data[filename.stem] = json.load(f)
 
     return data
+
 
 def datetime_to_slot(date: datetime.datetime, yesterday: bool) -> int:
     """
@@ -280,7 +284,8 @@ if __name__ == "__main__":
 
         for name, jeedom_name in names.items():
             if "date" in name:
-                values[name] = jeedom_variable(names[name], conv=datetime.datetime.fromisoformat, default=datetime.datetime.fromtimestamp(0))
+                values[name] = jeedom_variable(names[name], conv=datetime.datetime.fromisoformat,
+                                               default=datetime.datetime.fromtimestamp(0))
             else:
                 values[name] = jeedom_variable(names[name], conv=float, default=0)
 
@@ -299,8 +304,3 @@ if __name__ == "__main__":
         values['heating_current'] = values['heating_commit'] + heating_update[1]
         for name, jeedom_name in names.items():
             jeedom_variable(jeedom_name, values[name])
-
-
-
-
-

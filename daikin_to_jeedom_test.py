@@ -1,28 +1,29 @@
 #!/usr/bin/env python3
 
 import unittest
-from unittest.mock import MagicMock
-from daikin_to_jeedom import *
+import datetime
+from daikin_to_jeedom import datetime_to_slot, cumulate_power, json_validate_str, json_validate_dict
+
 
 class Test(unittest.TestCase):
     def test_datetime_to_slot(self):
-        self.assertEqual(datetime_to_slot(datetime.datetime(2023,1,1,0,0,0),    True),  0)
-        self.assertEqual(datetime_to_slot(datetime.datetime(2023,1,1,2,0,0),    True),  1)
-        self.assertEqual(datetime_to_slot(datetime.datetime(2023,1,1,11,59,59), True),  5)
-        self.assertEqual(datetime_to_slot(datetime.datetime(2023,1,1,23,59,59), True),  11)
-        self.assertEqual(datetime_to_slot(datetime.datetime(2023,1,1,1,00,00),  False), 12)
-        self.assertEqual(datetime_to_slot(datetime.datetime(2023,1,1,2,00,00),  False), 13)
-        self.assertEqual(datetime_to_slot(datetime.datetime(2023,1,1,22,00,00), False), 23)
+        self.assertEqual(datetime_to_slot(datetime.datetime(2023, 1, 1, 0, 0, 0),    True),  0)
+        self.assertEqual(datetime_to_slot(datetime.datetime(2023, 1, 1, 2, 0, 0),    True),  1)
+        self.assertEqual(datetime_to_slot(datetime.datetime(2023, 1, 1, 11, 59, 59), True),  5)
+        self.assertEqual(datetime_to_slot(datetime.datetime(2023, 1, 1, 23, 59, 59), True),  11)
+        self.assertEqual(datetime_to_slot(datetime.datetime(2023, 1, 1, 1, 00, 00),  False), 12)
+        self.assertEqual(datetime_to_slot(datetime.datetime(2023, 1, 1, 2, 00, 00),  False), 13)
+        self.assertEqual(datetime_to_slot(datetime.datetime(2023, 1, 1, 22, 00, 00), False), 23)
 
     def test_cumulate_power(self):
         power_data = list(range(24))
 
         self.assertEqual(cumulate_power(power_data,
-                                        datetime.datetime(2023,1,1, 0,0),
-                                        datetime.datetime(2023,1,1, 2,0)), (12, 13))
+                                        datetime.datetime(2023, 1, 1, 0, 0),
+                                        datetime.datetime(2023, 1, 1, 2, 0)), (12, 13))
         self.assertEqual(cumulate_power(power_data,
-                                        datetime.datetime(2023,1,1, 21,10),
-                                        datetime.datetime(2023,1,2, 0,5)), (10+11, 12))
+                                        datetime.datetime(2023, 1, 1, 21, 10),
+                                        datetime.datetime(2023, 1, 2, 0, 5)), (10 + 11, 12))
 
     def test_json_validate_str(self):
         self.assertEqual(json_validate_str('test', 1), "test: expecting a string")
@@ -82,8 +83,5 @@ class Test(unittest.TestCase):
                          None)
 
 
-
 if __name__ == "__main__":
     unittest.main()
-
-
