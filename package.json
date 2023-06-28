@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "daikin-controller-cloud": "^1.0.4"
+  }
+}

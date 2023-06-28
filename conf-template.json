@@ -1,0 +1,13 @@
+{
+    "jeedom": {
+        "api_key": "<your API key from jeedom>",
+        "host": "http://127.0.0.1"
+    },
+    "daikin": {
+        "username": "<daikin username>",
+        "password": "<daikin password>"
+    },
+    "conf": {
+        "data_dir": "daikin-data"
+    }
+}

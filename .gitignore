@@ -1,0 +1,6 @@
+conf.json
+daikin-data
+__pycache__
+node_modules
+.vscode
+package-lock.json
