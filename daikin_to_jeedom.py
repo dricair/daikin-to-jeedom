@@ -13,9 +13,6 @@ import argparse
 # Loaded from configuration file
 conf = {}
 
-DAIKIN_USERNAME = "cairaud@gmail.com"
-DAIKIN_PASSWORD = "cLtXMsRv3#"
-
 JEEDOM_URL = "{JEEDOM_HOST}/core/api/jeeApi.php"
 DAIKIN_SCRIPT = Path("daikin_data.js")
 
