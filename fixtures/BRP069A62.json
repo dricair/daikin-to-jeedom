@@ -1,0 +1,602 @@
+{
+  "0": {
+    "name": {
+      "settable": true,
+      "maxLength": 63,
+      "value": "Gateway"
+    },
+    "iconId": {
+      "settable": true,
+      "value": 3
+    },
+    "firmwareVersion": {
+      "settable": false,
+      "value": "436CC160000"
+    },
+    "isFirmwareUpdateSupported": {
+      "settable": false,
+      "value": true
+    },
+    "miconId": {
+      "settable": false,
+      "value": "1700390A"
+    },
+    "serialNumber": {
+      "settable": false,
+      "value": "--retiré--"
+    },
+    "modelInfo": {
+      "settable": false,
+      "value": "BRP069A62"
+    },
+    "ipAddress": {
+      "settable": false,
+      "value": "--retiré--"
+    },
+    "macAddress": {
+      "settable": false,
+      "value": "--retiré--"
+    },
+    "errorCode": {
+      "settable": false,
+      "value": ""
+    },
+    "isInErrorState": {
+      "settable": false,
+      "value": false
+    }
+  },
+  "1": {
+    "name": {
+      "settable": true,
+      "value": "PAC",
+      "maxLength": 63
+    },
+    "iconId": {
+      "settable": true,
+      "value": 8
+    },
+    "errorCode": {
+      "settable": false,
+      "value": ""
+    },
+    "holidayMode": {},
+    "isHolidayModeActive": {
+      "settable": false,
+      "value": false
+    },
+    "isInErrorState": {
+      "settable": false,
+      "value": false
+    },
+    "isInWarningState": {
+      "settable": false,
+      "value": false
+    },
+    "isInInstallerState": {
+      "settable": false,
+      "value": false
+    },
+    "isInEmergencyState": {
+      "settable": false,
+      "value": false
+    },
+    "onOffMode": {
+      "settable": true,
+      "values": [
+        "on",
+        "off"
+      ],
+      "value": "on"
+    },
+    "setpointMode": {
+      "settable": false,
+      "values": [
+        "fixed",
+        "weatherDependent",
+        "weatherDependentHeatingFixedCooling"
+      ],
+      "value": "weatherDependentHeatingFixedCooling"
+    },
+    "controlMode": {
+      "settable": false,
+      "values": [
+        "roomTemperature",
+        "leavingWaterTemperature",
+        "externalRoomTemperature"
+      ],
+      "value": "roomTemperature"
+    },
+    "consumptionData": {
+      "/electrical": {
+        "heating": {
+          "d": [
+            0,
+            0,
+            0,
+            0,
+            2,
+            1,
+            0,
+            0,
+            0,
+            0,
+            1,
+            2,
+            0,
+            0,
+            0,
+            0,
+            1,
+            1,
+            0,
+            0,
+            1,
+            2,
+            0,
+            null
+          ],
+          "w": [
+            4,
+            0,
+            3,
+            5,
+            3,
+            4,
+            2,
+            5,
+            6,
+            6,
+            9,
+            6,
+            6,
+            5
+          ],
+          "m": [
+            373,
+            273,
+            195,
+            96,
+            0,
+            0,
+            null,
+            0,
+            0,
+            0,
+            199,
+            476,
+            390,
+            341,
+            267,
+            195,
+            7,
+            0,
+            0,
+            0,
+            0,
+            31,
+            32,
+            null
+          ]
+        },
+        "unit": "kWh"
+      }
+    },
+    "sensoryData": {
+      "/roomTemperature": {
+        "settable": false,
+        "value": 18.6
+      },
+      "/outdoorTemperature": {
+        "settable": false,
+        "value": 10
+      },
+      "/leavingWaterTemperature": {
+        "settable": false,
+        "value": 45
+      }
+    },
+    "temperatureControl": {
+      "/operationModes/heating/setpoints/roomTemperature": {
+        "maxValue": 24,
+        "minValue": 12,
+        "stepValue": 0.5,
+        "settable": true,
+        "value": 17
+      },
+      "/operationModes/heating/setpoints/leavingWaterOffset": {
+        "maxValue": 10,
+        "minValue": -10,
+        "stepValue": 1,
+        "settable": true,
+        "value": 0
+      }
+    },
+    "operationMode": {
+      "settable": true,
+      "values": [
+        "heating"
+      ],
+      "value": "heating"
+    },
+    "schedule": {
+      "/currentMode": {
+        "settable": false,
+        "values": [
+          "heating"
+        ],
+        "value": "heating"
+      },
+      "/modes/heating/currentSchedule": {
+        "settable": true,
+        "values": [
+          "0",
+          "1",
+          "2"
+        ],
+        "value": "0"
+      },
+      "/modes/heating/enabled": {
+        "settable": true,
+        "value": true
+      },
+      "/modes/heating/meta": {
+        "minIntervalBetweenActions": "00:10:00",
+        "maxSchedules": 3,
+        "maxActionsPerActionPeriod": 6,
+        "consecutiveActionsAllowed": true,
+        "actionTypes": {
+          "roomTemperature": {
+            "settable": false,
+            "maxValue": 24,
+            "minValue": 12,
+            "stepValue": 1
+          }
+        }
+      },
+      "/modes/heating/schedules/0": {
+        "settable": true,
+        "name": {
+          "value": "User defined 1",
+          "settable": false
+        },
+        "meta": {
+          "isReadOnly": false,
+          "actionPeriods": [
+            "monday",
+            "tuesday",
+            "wednesday",
+            "thursday",
+            "friday",
+            "saturday",
+            "sunday"
+          ]
+        },
+        "actions": {
+          "monday": {
+            "05:50:00": {
+              "roomTemperature": 19
+            },
+            "08:00:00": {
+              "roomTemperature": 18
+            },
+            "14:00:00": {
+              "roomTemperature": 19
+            },
+            "20:30:00": {
+              "roomTemperature": 18
+            },
+            "22:20:00": {
+              "roomTemperature": 17
+            }
+          },
+          "tuesday": {
+            "00:00:00": {
+              "roomTemperature": 17
+            },
+            "05:40:00": {
+              "roomTemperature": 19
+            },
+            "08:00:00": {
+              "roomTemperature": 18
+            },
+            "16:00:00": {
+              "roomTemperature": 19
+            },
+            "20:30:00": {
+              "roomTemperature": 18
+            },
+            "22:20:00": {
+              "roomTemperature": 17
+            }
+          },
+          "wednesday": {
+            "00:00:00": {
+              "roomTemperature": 17
+            },
+            "06:30:00": {
+              "roomTemperature": 19
+            },
+            "20:30:00": {
+              "roomTemperature": 18
+            },
+            "22:20:00": {
+              "roomTemperature": 17
+            }
+          },
+          "thursday": {
+            "00:00:00": {
+              "roomTemperature": 17
+            },
+            "06:30:00": {
+              "roomTemperature": 19
+            },
+            "08:00:00": {
+              "roomTemperature": 18
+            },
+            "17:00:00": {
+              "roomTemperature": 19
+            },
+            "20:30:00": {
+              "roomTemperature": 18
+            },
+            "22:20:00": {
+              "roomTemperature": 17
+            }
+          },
+          "friday": {
+            "06:30:00": {
+              "roomTemperature": 19
+            },
+            "08:00:00": {
+              "roomTemperature": 18
+            },
+            "17:00:00": {
+              "roomTemperature": 19
+            },
+            "20:30:00": {
+              "roomTemperature": 18
+            },
+            "22:30:00": {
+              "roomTemperature": 18
+            },
+            "23:30:00": {
+              "roomTemperature": 17
+            }
+          },
+          "saturday": {
+            "08:30:00": {
+              "roomTemperature": 19
+            },
+            "22:30:00": {
+              "roomTemperature": 18
+            }
+          },
+          "sunday": {
+            "00:00:00": {
+              "roomTemperature": 17
+            },
+            "08:30:00": {
+              "roomTemperature": 19
+            },
+            "20:30:00": {
+              "roomTemperature": 18
+            },
+            "22:10:00": {
+              "roomTemperature": 17
+            }
+          }
+        }
+      },
+      "/modes/heating/schedules/1": {
+        "settable": true,
+        "name": {
+          "value": "User defined 2",
+          "settable": false
+        },
+        "meta": {
+          "isReadOnly": false,
+          "actionPeriods": [
+            "monday",
+            "tuesday",
+            "wednesday",
+            "thursday",
+            "friday",
+            "saturday",
+            "sunday"
+          ]
+        },
+        "actions": {
+          "saturday": {
+            "22:30:00": {
+              "roomTemperature": 17
+            }
+          }
+        }
+      },
+      "/modes/heating/schedules/2": {
+        "settable": true,
+        "name": {
+          "value": "User defined 3",
+          "settable": false
+        },
+        "meta": {
+          "isReadOnly": false,
+          "actionPeriods": [
+            "monday",
+            "tuesday",
+            "wednesday",
+            "thursday",
+            "friday",
+            "saturday",
+            "sunday"
+          ]
+        },
+        "actions": {
+          "monday": {
+            "08:00:00": {
+              "roomTemperature": 19
+            },
+            "12:00:00": {
+              "roomTemperature": 17
+            },
+            "19:40:00": {
+              "roomTemperature": 19
+            },
+            "23:00:00": {
+              "roomTemperature": 17
+            }
+          },
+          "tuesday": {
+            "08:00:00": {
+              "roomTemperature": 19
+            },
+            "12:00:00": {
+              "roomTemperature": 17
+            },
+            "19:40:00": {
+              "roomTemperature": 19
+            },
+            "23:00:00": {
+              "roomTemperature": 17
+            }
+          },
+          "wednesday": {
+            "08:00:00": {
+              "roomTemperature": 19
+            },
+            "12:00:00": {
+              "roomTemperature": 17
+            },
+            "19:40:00": {
+              "roomTemperature": 19
+            },
+            "23:00:00": {
+              "roomTemperature": 17
+            }
+          },
+          "thursday": {
+            "08:00:00": {
+              "roomTemperature": 19
+            },
+            "12:00:00": {
+              "roomTemperature": 17
+            },
+            "19:40:00": {
+              "roomTemperature": 19
+            },
+            "23:00:00": {
+              "roomTemperature": 17
+            }
+          },
+          "friday": {
+            "08:00:00": {
+              "roomTemperature": 19
+            },
+            "12:00:00": {
+              "roomTemperature": 17
+            },
+            "19:40:00": {
+              "roomTemperature": 19
+            },
+            "23:00:00": {
+              "roomTemperature": 17
+            }
+          },
+          "saturday": {
+            "08:00:00": {
+              "roomTemperature": 19
+            },
+            "12:00:00": {
+              "roomTemperature": 17
+            },
+            "19:40:00": {
+              "roomTemperature": 19
+            },
+            "23:00:00": {
+              "roomTemperature": 17
+            }
+          },
+          "sunday": {
+            "08:00:00": {
+              "roomTemperature": 19
+            },
+            "12:00:00": {
+              "roomTemperature": 17
+            },
+            "19:40:00": {
+              "roomTemperature": 19
+            },
+            "23:00:00": {
+              "roomTemperature": 17
+            }
+          }
+        }
+      }
+    },
+    "targetTemperature": {
+      "settable": true,
+      "value": 17,
+      "maxValue": 24,
+      "minValue": 12,
+      "stepValue": 0.5
+    }
+  },
+  "3": {
+    "name": {
+      "settable": true,
+      "maxLength": 63,
+      "value": "Indoor Unit Hydro"
+    },
+    "iconId": {
+      "settable": true,
+      "value": 4
+    },
+    "modelInfo": {
+      "settable": false,
+      "value": "EABH16DA6V"
+    },
+    "softwareVersion": {
+      "settable": false,
+      "value": "ID8293"
+    },
+    "eepromVersion": {
+      "settable": false,
+      "value": "AS1708171-11E"
+    }
+  },
+  "4": {
+    "name": {
+      "settable": true,
+      "maxLength": 63,
+      "value": "Outdoor Unit"
+    },
+    "iconId": {
+      "settable": true,
+      "value": 5
+    },
+    "softwareVersion": {
+      "settable": false,
+      "value": "ID802D"
+    }
+  },
+  "5": {
+    "name": {
+      "settable": true,
+      "maxLength": 63,
+      "value": "User Interface"
+    },
+    "iconId": {
+      "settable": true,
+      "value": 6
+    },
+    "softwareVersion": {
+      "settable": false,
+      "value": "v03.01.00"
+    },
+    "eepromVersion": {
+      "settable": false,
+      "value": "--"
+    }
+  }
+}

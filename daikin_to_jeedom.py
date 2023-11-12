@@ -1,6 +1,6 @@
 #! /usr/bin/env python3
 
-from typing import Any, Optional, Dict, List, Callable
+from typing import Any, Optional, Dict, List, Callable, Union
 import requests
 import subprocess
 import re
@@ -15,6 +15,7 @@ conf = {}
 
 JEEDOM_URL = "{JEEDOM_HOST}/core/api/jeeApi.php"
 DAIKIN_SCRIPT = Path("daikin_data.js")
+CONSUMPTION_DATA = "consumptionData"
 
 CONF_SCHEMA = {
   "$schema": "http://json-schema.org/draft-04/schema#",
@@ -234,6 +235,34 @@ def cumulate_power(power_data: List[int], last_date: datetime.datetime, now: dat
     return (cumulate, power_data[current_slot])
 
 
+def find_consumption_data(data: Union[Dict,List]) -> Optional[Dict]:
+    """
+    Recursively find consumption data independenty of the format. It can contain list or dicts.
+
+    Args:
+      data (List or Dict): Data from Daikin
+
+    Return the Dict, or None if not found
+    """
+    if isinstance(data, list):
+        for item in data:
+            result = find_consumption_data(item)
+            if result is not None:
+                return result
+
+    elif isinstance(data, dict):
+        for key, value in data.items():
+            if key == CONSUMPTION_DATA:
+                return value
+            elif isinstance(value, (dict, list)):
+                result = find_consumption_data(value)
+                if result is not None:
+                    return result
+
+    return None
+
+
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("-c", "--conf", type=Path, default="conf.json", help="JSON configuration file")
@@ -266,7 +295,7 @@ if __name__ == "__main__":
 
     # Get power data from Daikin
     for key, data in get_daikin_data().items():
-        consumption_data = data["climateControl"]["consumptionData"]["/electrical"]
+        consumption_data = find_consumption_data(data)['/electrical']
 
         now = datetime.datetime.now()
         names = {
