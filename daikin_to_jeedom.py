@@ -296,15 +296,18 @@ if __name__ == "__main__":
     # Get power data from Daikin
     for key, data in get_daikin_data().items():
         consumption_data = find_consumption_data(data)['/electrical']
+        has_cooling = "cooling" in consumption_data
 
         now = datetime.datetime.now()
         names = {
             "commit_date": f"daikin.{key}.commit_date",
-            "cooling_current": f"daikin.{key}.cooling_current",
-            "cooling_commit": f"daikin.{key}.cooling_commit",
             "heating_current": f"daikin.{key}.heating_current",
             "heating_commit": f"daikin.{key}.heating_commit",
         }
+
+        if has_cooling:
+            names["cooling_current"] = f"daikin.{key}.cooling_current"
+            names["cooling_commit"]: f"daikin.{key}.cooling_commit"
 
         values = {}
 
@@ -317,16 +320,18 @@ if __name__ == "__main__":
 
         logging.debug(f"{key} - " + ", ".join([f"{key}: {val}" for key, val in values.items()]))
 
-        cooling_update = cumulate_power(consumption_data["cooling"]["d"], values["commit_date"], now)
         heating_update = cumulate_power(consumption_data["heating"]["d"], values["commit_date"], now)
-
-        logging.info(f"{key}: cooling update {values['cooling_commit']} + {cooling_update[0]} + {cooling_update[1]}")
         logging.info(f"{key}: heating update {values['heating_commit']} + {heating_update[0]} + {heating_update[1]}")
 
+        if has_cooling:
+            cooling_update = cumulate_power(consumption_data["cooling"]["d"], values["commit_date"], now)
+            logging.info(f"{key}: cooling update {values['cooling_commit']} + {cooling_update[0]} + {cooling_update[1]}")
+
         values['commit_date'] = now.isoformat()
-        values['cooling_commit'] = values['cooling_commit'] + cooling_update[0]
-        values['cooling_current'] = values['cooling_commit'] + cooling_update[1]
         values['heating_commit'] = values['heating_commit'] + heating_update[0]
         values['heating_current'] = values['heating_commit'] + heating_update[1]
+        if has_cooling:
+            values['cooling_commit'] = values['cooling_commit'] + cooling_update[0]
+            values['cooling_current'] = values['cooling_commit'] + cooling_update[1]
         for name, jeedom_name in names.items():
             jeedom_variable(jeedom_name, values[name])
