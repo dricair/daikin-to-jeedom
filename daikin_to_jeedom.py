@@ -307,7 +307,7 @@ if __name__ == "__main__":
 
         if has_cooling:
             names["cooling_current"] = f"daikin.{key}.cooling_current"
-            names["cooling_commit"]: f"daikin.{key}.cooling_commit"
+            names["cooling_commit"] = f"daikin.{key}.cooling_commit"
 
         values = {}
 
