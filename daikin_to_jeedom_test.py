@@ -4,7 +4,8 @@ import unittest
 import datetime
 import json
 from pathlib import Path
-from daikin_to_jeedom import *
+from daikin_to_jeedom import json_validate_str, json_validate_dict
+from daikin_to_jeedom import datetime_to_slot, cumulate_power, find_consumption_data
 
 
 class Test(unittest.TestCase):
@@ -84,7 +85,6 @@ class Test(unittest.TestCase):
         self.assertEqual(json_validate_dict('root', {"password": {"value": "password"}}, schema),
                          None)
 
-
     def test_find_consumption_data(self):
         json_files = list(Path("fixtures").glob("*.json"))
         self.assertGreater(len(json_files), 0)
@@ -96,7 +96,6 @@ class Test(unittest.TestCase):
             result = find_consumption_data(data)
             self.assertIsNotNone(result, f"File {json_file}: return None")
             self.assertTrue('/electrical' in result, f"File {json_file}: consumptionData does not contain '/electrical'")
-
 
 
 if __name__ == "__main__":

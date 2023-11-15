@@ -18,56 +18,56 @@ DAIKIN_SCRIPT = Path("daikin_data.js")
 CONSUMPTION_DATA = "consumptionData"
 
 CONF_SCHEMA = {
-  "$schema": "http://json-schema.org/draft-04/schema#",
-  "type": "object",
-  "properties": {
-    "jeedom": {
-      "type": "object",
-      "properties": {
-        "api_key": {
-          "type": "string"
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "type": "object",
+    "properties": {
+        "jeedom": {
+            "type": "object",
+            "properties": {
+                "api_key": {
+                    "type": "string"
+                },
+                "host": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "api_key",
+                "host"
+            ]
         },
-        "host": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "api_key",
-        "host"
-      ]
-    },
-    "daikin": {
-      "type": "object",
-      "properties": {
-        "username": {
-          "type": "string"
+        "daikin": {
+            "type": "object",
+            "properties": {
+                "username": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "username",
+                "password"
+            ]
         },
-        "password": {
-          "type": "string"
+        "conf": {
+            "type": "object",
+            "properties": {
+                "data_dir": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "data_dir"
+            ]
         }
-      },
-      "required": [
-        "username",
-        "password"
-      ]
     },
-    "conf": {
-      "type": "object",
-      "properties": {
-        "data_dir": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "data_dir"
-      ]
-    }
-  },
-  "required": [
-    "jeedom",
-    "daikin",
-    "conf"
-  ]
+    "required": [
+        "jeedom",
+        "daikin",
+        "conf"
+    ]
 }
 
 
@@ -231,11 +231,13 @@ def cumulate_power(power_data: List[int], last_date: datetime.datetime, now: dat
     logging.debug(f"Current slot: {current_slot}")
     logging.debug(f"Last slot: {last_slot}")
 
+    # Force data to 0 when None is found
+    power_data = [0 if d is None else d for d in power_data]
     cumulate = 0 if current_slot <= last_slot else sum(power_data[last_slot:current_slot])
     return (cumulate, power_data[current_slot])
 
 
-def find_consumption_data(data: Union[Dict,List]) -> Optional[Dict]:
+def find_consumption_data(data: Union[Dict, List]) -> Optional[Dict]:
     """
     Recursively find consumption data independenty of the format. It can contain list or dicts.
 
@@ -260,7 +262,6 @@ def find_consumption_data(data: Union[Dict,List]) -> Optional[Dict]:
                     return result
 
     return None
-
 
 
 if __name__ == "__main__":
